@@ -17,7 +17,8 @@ def love():
     print("- I love Mariam")
 
 
-
+def lovee():
+    print("- I love 😂")
 
 
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
