@@ -8,31 +8,6 @@ import requests
 
 
 
-
-
-
-#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
-#دالة ارسال اليوزرات
-
-def tl(token, id, username, developer_url=""):
-    bot = telebot.TeleBot(token)
-    
-    formatted_message = f"""
-    *User Telegram:* `{username}`
-    
-    [Tool developer]({developer_url})
-    """
-    bot.send_message(id, formatted_message, parse_mode='MarkdownV2')
-
-# Example usage:
-if __name__ == "__main__":
-    def send_telegram_message(token, id, username):
-        tl(token, id, username)
-
-
-
-#pazok.tl(توكن البوت, ايدي التلي, متغير اليوزر, رابط قناتك )
-
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
 
 
@@ -73,8 +48,19 @@ if __name__ == "__main__":
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
             
                 
-                    
-                        
+#انشاء يوزرات
+def user_ran(pattern):
+    import random
+    username = ''
+    for char in pattern:
+        if char == '1':
+            username += random.choice('abcdefghijklmnopqrstuvwxyz0123456789')
+        else:
+            username += char
+    return username.strip()
+
+#jj=pazok.user_ran("111_1")
+#print(jj)
                                 
                                 
 #- - - - - - - - - - - - - - - - - - - - -- - - - - #
@@ -106,24 +92,39 @@ ss = 5
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
 
 
+#ارسال تلي حديث
+def tele_ms(token, chat_id, msg_tele="", buttons_info=None):
+    import telebot
+    from telebot import types
+    bot = telebot.TeleBot(token)
+
+    formatted_message = msg_tele
+
+    keyboard = types.InlineKeyboardMarkup()
+    if buttons_info:
+        for i in range(0, len(buttons_info), 2):
+            button_name = buttons_info[i]
+            button_url = buttons_info[i+1]
+            button = types.InlineKeyboardButton(button_name, url=button_url)
+            keyboard.add(button)
+
+    bot.send_message(chat_id, formatted_message, parse_mode='MarkdownV2', reply_markup=keyboard)
 
 
 
+#token="6237316132:AAHsiY0FzT5ebjdseScp5KAHOmmOqAfyZs0"
+#id="790448681"
 
+#ms="*test* `hello` ~pazok~"
 
-#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
-#دالة ارسال التلي العاديه
+#po=[
 
-def tll(message, token, id):
-    mesg = message
-    requests.get("https://api.telegram.org/bot" + str(token) + "/sendMessage?chat_id=" + str(id) + "&text=" + str(mesg))
+#"1","https://t.me/b_azok",
+#"2","https://t.me/b_azok",
+#"3","https://t.me/b_azok"
+#]
 
-#token = ""
-#id = ""
-#pazok.tll("هذه رسالة اختبار", token, id)
-
-#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
-
+#pazok.tele_ms(token,id,ms,po)
 
 
 
@@ -360,7 +361,6 @@ def name_halo():
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
 
 #تخويل الصور الى نقاط
-
 
 def picture(image_path, height=20):
     import os
