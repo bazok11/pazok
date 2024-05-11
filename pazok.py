@@ -17,6 +17,9 @@ def love():
     print("- I love Mariam")
 
 
+
+
+
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
 
 #دالة تلاشي النص
@@ -276,6 +279,7 @@ def pazok_halo(text, spinner, duration):
     time.sleep(duration)
     spinner_instance.stop_and_persist(symbol='', text='')
     print(' ' * len(text), end='\r')
+    return None
 
 #pazok.pazok_halo("النص المطلوب", "النمط", الوقت)
 
@@ -386,3 +390,182 @@ def picture(image_path, height=20):
 
 #jj=pazok.picture(x,z)
 #print(jj)
+
+
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#التحديث:
+
+#يوزر ايجنت
+
+def agnt():
+    from fake_useragent import UserAgent
+    ua = UserAgent()
+    return ua.chrome
+
+#pazok.agnt()
+
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+
+#اللوان
+colors = ['o', 'b', 'm', 'F', 'Z', 'e', 'C', 'p', 'X', 'B', 'E']
+o = "\u001b[38;5;208m" 
+b = "\u001b[38;5;14m"
+m = "\u001b[38;5;15m"
+F = '\033[2;32m'
+Z = '\033[1;31m'
+e = "\033[0;90m"
+C = "\033[1;97m"
+p = '\x1b[1m'
+X = '\033[1;33m'
+B = '\033[2;36m'
+E = "\u001b[38;5;8m"
+__all__ = colors
+
+#طباعة اسماء الاللوان
+def name_clo():
+    colors_text = """
+    
+o = برتقالي
+b = أزرق
+m = أبيض
+F = أخضر غامق
+Z = أحمر فاتح
+e = رمادي غامق
+C = أبيض قوي
+p = خط عريض
+X = أصفر
+B = سماوي
+E = رمادي فاتح
+
+"""
+    return colors_text
+
+
+
+
+
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#سليب
+def sleep(seconds=None):
+    import random
+    if seconds is None:
+        seconds = random.uniform(0.5, 1)
+    time.sleep(seconds)
+    return seconds
+
+#pazok.sleep()
+
+
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#يوزرات من ملف
+def user_file(file_name):
+    import os
+    import sys
+
+    file_path = os.path.join(os.getcwd(), file_name)
+    try:
+        if os.path.getsize(file_path) == 0:
+            print("Error The text file is empty")
+            exit()                 
+        with open(file_path, 'r+') as file:
+            first_line = file.readline().strip()
+            username = first_line.split("@")[0] if "@" in first_line else first_line
+            email = username    
+            file.seek(0)
+            data = file.readlines()
+            file.seek(0)
+            for line in data[1:]:
+                file.write(line)
+            file.truncate()            
+            return username 
+    except FileNotFoundError:
+        print("File not found error")
+        exit()
+    except Exception as e:
+        print("حدث خطأ: ", e)
+        exit() 
+
+#pazok.user_file("اسم ملف اللسته")
+
+
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#طباعة عدد سطور اللسته
+def file_np(file_path):
+    try:
+        with open(file_path, 'r') as file:
+            lines = file.readlines()
+            return len(lines)
+    except FileNotFoundError:
+        print("الملف غير موجود")
+        return 0
+
+#print(pazok.file_np("user.py"))
+
+
+
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#كوكيز انستا
+class InstagramSession:    
+    def __init__(self, csrftoken, ds_user_id, rur, sessionid):
+        self.csrftoken = csrftoken
+        self.ds_user_id = ds_user_id
+        self.rur = rur
+        self.sessionid = sessionid
+
+def log_in(username, password):
+    
+    import requests
+    from fake_useragent import UserAgent
+
+    ua = UserAgent()
+    agnt = str(ua.getChrome)
+
+    url = 'https://www.instagram.com/accounts/login/ajax/'
+
+    headers = {
+        'accept': '*/*',
+        'accept-encoding': 'gzip, deflate, br',
+        'accept-language': 'ar,en-US;q=0.9,en;q=0.8',
+        'content-length': '275',
+        'content-type': 'application/x-www-form-urlencoded',
+        'cookie': 'csrftoken=DqBQgbH1p7xEAaettRA0nmApvVJTi1mR; ig_did=C3F0FA00-E82D-41C4-99E9-19345C41EEF2; mid=X8DW0gALAAEmlgpqxmIc4sSTEXE3; ig_nrcb=1',
+        'origin': 'https://www.instagram.com',
+        'referer': 'https://www.instagram.com/',
+        'sec-fetch-dest': 'empty',
+        'sec-fetch-mode': 'cors',
+        'sec-fetch-site': 'same-origin',
+        'user-agent': agnt,
+        'x-csrftoken': 'DqBQgbH1p7xEAaettRA0nmApvVJTi1mR',
+        'x-ig-app-id': '936619743392459',
+        'x-ig-www-claim': '0',
+        'x-instagram-ajax': 'bc3d5af829ea',
+        'x-requested-with': 'XMLHttpRequest'
+    }
+
+    data = {
+        'username': username,
+        'enc_password': f'#PWD_INSTAGRAM_BROWSER:0:1589682409:{password}',
+        'queryParams': '{}',
+        'optIntoOneTap': 'false'
+    }
+
+    response = requests.post(url, headers=headers, data=data)
+    cookies = None
+    if response.status_code == 200:
+        cookies = response.cookies.get_dict()
+        csrftoken = cookies.get("csrftoken")
+        ds_user_id = cookies.get("ds_user_id")
+        rur = cookies.get("rur")
+        sessionid = cookies.get("sessionid")
+        return InstagramSession(csrftoken, ds_user_id, rur, sessionid)
+    else:
+        return None
+
+#username = "jdjdjuuuudjjdk"
+#password = "mmkkoopp"
+
+#jj=pazok.log_in(username, password)
+#print(jj.sessionid)
+#print(jj.csrftoken)
+#print(jj.rur)
+#print(jj.ds_user_id)
