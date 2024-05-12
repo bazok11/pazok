@@ -404,6 +404,13 @@ def agnt():
 
 #pazok.agnt()
 
+#يوزر ايجنت انستا
+def agnt_in():
+    from OneClick import Hunter
+    agent = Hunter.Services()
+    return str(agent)
+
+
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
 
 #اللوان
