@@ -576,3 +576,38 @@ def log_in(username, password):
 #print(jj.csrftoken)
 #print(jj.rur)
 #print(jj.ds_user_id)
+
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#تحديث
+#جلب بروكسيات
+import requests
+import os
+
+def proxy():
+    url = "https://api.proxyscrape.com/v2/?request=getproxies&protocol=https&timeout=10000&country=all&ssl=all&anonymity=all"
+    file_name = "proxy.txt"
+    if not os.path.exists(file_name):
+        with open(file_name, "w") as file:
+            file.write(requests.get(url).text)
+    else:
+        pass
+        
+#pazok.proxy()
+        
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#طباعة بروكسيات تسلسل
+
+def get_proxy():
+    with open("proxy.txt", "r+") as file:
+        lines = file.readlines()
+        if not lines:
+            return None      
+        next_proxy = lines.pop(0).strip()  
+        file.seek(0)
+        file.writelines(lines)
+        file.write("\n" + next_proxy)    
+    return next_proxy
+
+#jj=pazok.get_proxy()
+
+
