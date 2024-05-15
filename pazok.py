@@ -583,28 +583,16 @@ def log_in(username, password):
 import requests
 import os
 
-def prox():
-    list_urls = [
-        "https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt",
-        "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/http.txt"
-    ]
-
-    proxies = set()
-    for url in list_urls:
-        response = requests.get(url)
-        if response.status_code == 200:
-            proxies.update(response.text.split('\n'))
-        else:
-            print(f"Failed to retrieve proxies from {url}")
+def proxy():
+    url = "https://api.proxyscrape.com/v2/?request=getproxies&protocol=https&timeout=10000&country=all&ssl=all&anonymity=all"
     file_name = "proxy.txt"
-    with open(file_name, "w") as file:
-        for proxy in proxies:
-            cleaned_proxy = proxy.strip()
-            if cleaned_proxy:
-                file.write(cleaned_proxy + '\n')
-
-
-#pazok.prox()
+    if not os.path.exists(file_name):
+        with open(file_name, "w") as file:
+            file.write(requests.get(url).text)
+    else:
+        pass
+        
+#pazok.proxy()
 #- - - - - - - - - - - - - - -- - - - - - -- - - - - #
 #طباعة بروكسيات تسلسل
 
