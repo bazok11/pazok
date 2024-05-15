@@ -611,3 +611,15 @@ def get_proxy():
 #jj=pazok.get_proxy()
 
 
+#- - - - - - - - - - - - - - -- - - - - - -- - - - - #
+#طباعة بتنسيق .json()
+
+import json
+def json_req(response):
+    try:
+        json_response = response.json()
+    except AttributeError:
+        json_response = json.loads(response)
+    return json.dumps(json_response, indent=4)
+
+#print(pazok.json_req(rr))
