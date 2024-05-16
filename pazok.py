@@ -235,7 +235,7 @@ def info_bot():
 
 
 
-token, id = info_bot()
+#token, id = info_bot()
 
 
 
