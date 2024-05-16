@@ -133,14 +133,10 @@ def tele_ms(token, chat_id, msg_tele="", buttons_info=None):
 #دالة طلب توكن وايدي مره وحده
 
 def info_bot():
-    try:
-        import time, os
-        from colorama import init, Fore, Back, Style
-        from cfonts import render
-    except ImportError:
-        os.system('pip install colorama')
-        os.system('pip install cfonts')
-
+    
+    import time, os
+    from colorama import init, Fore, Back, Style
+    
     b = "\u001b[38;5;14m"  # سمائي
     m = "\u001b[38;5;15m"  # ابيض
     F = '\033[2;32m'  # أخضر
@@ -194,7 +190,15 @@ def info_bot():
         font = "block"
         letter_spacing = 2
         colors = ["gray", "cyan", "red"]
-        b_azokatext = render(text, font=font, colors=colors, align='center', letter_spacing=letter_spacing)
+        b_azokatext = """
+    \u001b[38;5;15m              _____     _              
+                 |_   _|__ | | _____ _ __  
+                   | |/ _ \| |/ / _ \ '_ \ 
+                   | | (_) |   <  __/ | | |
+                   |_|\___/|_|\_\___|_| |_|
+                                                   
+                    
+        """
         print(b_azokatext)
         token = input(f" - {b}Enter Token : {ee}")
         os.system('clear')
@@ -203,7 +207,14 @@ def info_bot():
         font1 = "block"
         letter_spacing1 = 1
         colors1 = ["gray", "cyan", "red"]
-        b_azokatext = render(text1, font=font1, colors=colors1, align='center', letter_spacing=letter_spacing1)
+        b_azokatext = """
+\u001b[38;5;15m               ____ _           _     ___ ____  
+              / ___| |__   __ _| |_  |_ _|  _ \ 
+             | |   | '_ \ / _` | __|  | || | | |
+             | |___| | | | (_| | |_   | || |_| |
+              \____|_| |_|\__,_|\__| |___|____/ 
+                                                                    
+        """
         print(b_azokatext)
         id = input(f" - {b}Enter ID : {ee}")
         os.system('clear')
@@ -221,6 +232,11 @@ def info_bot():
             exit(f"{Z}Invalid input. Please enter 'Y' or 'N'.")
 
     return token, id
+
+
+
+token, id = info_bot()
+
 
 
 
